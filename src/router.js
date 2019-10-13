@@ -6,6 +6,9 @@ import City from './views/city/index.vue'//城市选择页
 import Film from './views/film/index.vue'//电影详情
 import Cinema from './views/cinema/index.vue'//影院详情
 import Register from './views/register/index.vue'//注册页
+import Money from './views/money/index.vue' //钱包余额
+import Movie from './views/movie/index.vue' //电影影院选择
+import Seat from './views/seat/index.vue' //选座购票
 
 // 二级路由导入
 import Films from './views/home/films.vue'//电影列表页
@@ -53,6 +56,18 @@ const router = new Router({
     {
       path:'/register',
       component:Register
+    },
+    {
+      path:'/money',
+      component:Money
+    },
+    {
+      path:'/movie',
+      component:Movie
+    },
+    {
+      path:'/seat',
+      component:Seat
     }
   ]
 });
