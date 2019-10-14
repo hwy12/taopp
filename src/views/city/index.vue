@@ -31,16 +31,39 @@
           <li>北京</li>
         </ul>
       </div>
+      <ul class="abc">
+        <li>当前</li>
+        <li>GPS</li>
+        <li>热门</li>
+        <li>A</li>
+        <li>A</li>
+      </ul>
     </div>
   </div>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
   name: 'city',
   methods: {
     goback () {
       this.$router.back()
-    }
+    },
+    citysj: function () {}
+  },
+
+  created () {
+    axios.get('https://m.maizuo.com/gateway?k=5048855', {
+      headers: {
+        'X-Client-Info':
+          '{"a":"3000","ch":"1002","v":"5.0.4","e":"157085205520267950670338"}',
+        'X-Host': 'mall.film-ticket.city.list'
+      }
+    }).then(response => {
+      let result = response.data
+      console.log(result)
+    })
   }
 }
 </script>
@@ -65,6 +88,7 @@ export default {
   .xuanz {
     flex: 1;
     overflow: auto;
+    position: relative;
 
     div {
       p {
@@ -77,6 +101,19 @@ export default {
         color: #777;
         font-size: 16px;
         padding: 12px 12px 12px 15px;
+      }
+    }
+    .abc {
+      position: absolute;
+      width: 40px;
+      text-align: center;
+      right: 0;
+      top: 12px;
+      color: #1394f3;
+      font-size: 12px;
+
+      li {
+        line-height: 18px;
       }
     }
   }
