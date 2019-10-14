@@ -39,6 +39,11 @@
 import axios from "axios";
 export default {
    name: 'Cinemas',
+   data(){
+        return {
+            cinemasList
+        }
+   },
    created:function(){
        axios.get('https://m.maizuo.com/gateway',{
        params:{
@@ -53,7 +58,10 @@ export default {
         }
    })
    .then(response=>{
-       console.log(response)
+       this.cinemasList=response;
+       console.log(this.cinemasList)
+    //    console.log(response)
+
    })
    }
 }

@@ -34,15 +34,6 @@
         </div>
     </div>
 </template>
-<<<<<<< HEAD
-
-<script>
-
-export default {
-    
-}
-</script>
-=======
 <script>
 export default {
     name:'city',
@@ -91,4 +82,3 @@ export default {
     }
 }
 </style>
->>>>>>> 097ec888bf919d9ca75bfec55f885270a6352500
