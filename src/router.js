@@ -15,6 +15,9 @@ import Films from './views/home/films.vue'//电影列表页
 import Cinemas from './views/home/cinemas.vue'//影院列表页
 import Center from './views/home/center.vue'//个人中心
 
+//公共组件导入
+import cinemasSarch from './component/cinemasSarch.vue'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -29,7 +32,13 @@ const router = new Router({
         },
         {
           path:'cinemas',
-          component:Cinemas
+          component:Cinemas,
+          children:[
+            {
+              path:'',
+              component:cinemasSarch
+            }
+          ]
         },
         {
           path:'center',

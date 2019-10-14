@@ -75,8 +75,21 @@
         background: rgb(0, 0, 0, 0.6);
         color: #fff;
         margin-top: 16px;
+        margin-bottom: 16px;
         border-radius: 6px;
         // display: none;
+      }
+    }
+
+    .register-button {
+      display: flex;
+      justify-content: center;
+
+      button {
+        width: 330px;
+        height: 45px;
+        border-radius: 22px;
+        background: -webkit-linear-gradient(left, #ff9000, #ff5000) no-repeat;
       }
     }
   }
