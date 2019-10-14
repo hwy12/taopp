@@ -4,3 +4,10 @@
         <h1>城市选择</h1>
     </div>
 </template>
+
+<script>
+
+export default {
+    
+}
+</script>
