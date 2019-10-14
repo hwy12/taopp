@@ -22,10 +22,12 @@
         <p>手机格式错误,请输入正确的手机号码</p>
       </div>
 
+      <div class="tel-empty"></div>
+
       <!--tel-erro  end  -->
 
       <div class="register-button">
-        <button type="submit">注册</button>
+        <router-link tag="button" to="./login">注册</router-link>
       </div>
     </form>
   </div>
@@ -66,6 +68,7 @@
     .tel-erro {
       display: flex;
       justify-content: center;
+      // display: none;
 
       p {
         width: 320px;
@@ -77,8 +80,12 @@
         margin-top: 16px;
         margin-bottom: 16px;
         border-radius: 6px;
-        // display: none;
       }
+    }
+
+    .tel-empty {
+      height: 60px;
+      display: none;
     }
 
     .register-button {
@@ -90,6 +97,9 @@
         height: 45px;
         border-radius: 22px;
         background: -webkit-linear-gradient(left, #ff9000, #ff5000) no-repeat;
+        border: none;
+        font-size: 16px;
+        color: #fff;
       }
     }
   }
