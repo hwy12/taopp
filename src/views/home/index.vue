@@ -19,11 +19,14 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     .navbar{
         height: 50px;
         display: flex;
         align-items: center;
         justify-content: space-around;
+        background: #fff;
+        z-index: 999;
     }
 }
 </style>
