@@ -35,6 +35,30 @@
         </ul>
     </div>
 </template>
+<script>
+import axios from "axios";
+export default {
+   name: 'Cinemas',
+   created:function(){
+       axios.get('https://m.maizuo.com/gateway',{
+       params:{
+           cityId:440300,
+           ticketFlag:1,
+           k:1218797
+        },
+        headers:{
+            'X-Client-Info':
+            '{"a":"3000","ch":"1002","v":"5.0.4","e":"157052860619327352833105"}',
+            'X-Host': 'mall.film-ticket.cinema.list'
+        }
+   })
+   .then(response=>{
+       console.log(response)
+   })
+   }
+}
+
+</script>
 <style lang="scss">
 .page-home-filmas{
     flex: 1;
@@ -114,7 +138,7 @@
                 margin-right: 15px;
                 height:0.5px;
                 background: #666;
-                width:325px;
+                width:300px;
             }
         }
        
