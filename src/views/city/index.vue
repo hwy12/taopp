@@ -42,17 +42,17 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 export default {
-    name:'city',
-    methods:{
-        goback () {
-            this.$router.back()
-        },
-        citysj:function(){
-            
-        }
+  name: 'city',
+  methods: {
+    goback () {
+      this.$router.back()
+    },
+    citysj: function () {
+
     }
+  }
 }
 </script>
 <style lang="scss">
