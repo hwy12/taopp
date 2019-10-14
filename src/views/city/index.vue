@@ -36,13 +36,13 @@
 </template>
 <script>
 export default {
-  name: "city",
+  name: 'city',
   methods: {
-    goback() {
-      this.$router.back();
+    goback () {
+      this.$router.back()
     }
   }
-};
+}
 </script>
 <style lang="scss">
 .page-city {

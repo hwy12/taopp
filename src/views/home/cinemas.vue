@@ -25,7 +25,7 @@
                         <ul class="list-activity">
                             <li class="activity-item">
                                 <span class="hui">惠</span>
-                                中国机长等5部影片特惠 
+                                中国机长等5部影片特惠
                             </li>
                         </ul>
                     </a>
@@ -36,34 +36,33 @@
     </div>
 </template>
 <script>
-import axios from "axios";
+import axios from 'axios'
 export default {
-   name: 'Cinemas',
-   data(){
-        return {
-            cinemasList
-        }
-   },
-   created:function(){
-       axios.get('https://m.maizuo.com/gateway',{
-       params:{
-           cityId:440300,
-           ticketFlag:1,
-           k:1218797
-        },
-        headers:{
-            'X-Client-Info':
+  name: 'Cinemas',
+  data () {
+    return {
+      cinemasList: []
+    }
+  },
+  created: function () {
+    axios.get('https://m.maizuo.com/gateway', {
+      params: {
+        cityId: 440300,
+        ticketFlag: 1,
+        k: 1218797
+      },
+      headers: {
+        'X-Client-Info':
             '{"a":"3000","ch":"1002","v":"5.0.4","e":"157052860619327352833105"}',
-            'X-Host': 'mall.film-ticket.cinema.list'
-        }
-   })
-   .then(response=>{
-       this.cinemasList=response;
-       console.log(this.cinemasList)
-    //    console.log(response)
-
-   })
-   }
+        'X-Host': 'mall.film-ticket.cinema.list'
+      }
+    })
+      .then(response => {
+        this.cinemasList = response
+        console.log(this.cinemasList)
+        //    console.log(response)
+      })
+  }
 }
 
 </script>
@@ -149,7 +148,7 @@ export default {
                 width:300px;
             }
         }
-       
+
     }
 }
 </style>
