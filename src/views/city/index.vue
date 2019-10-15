@@ -6,7 +6,7 @@
       <h1>城市选择</h1>
       <i class="iconfont icon-error" @click="goback"></i>
     </div>
-    <div class="xuanz">
+    <div class="xuanz" ref="box">
       <div>
         <p>当前</p>
         <ul>
@@ -22,22 +22,23 @@
       <div>
         <p>热门</p>
         <ul>
-          <li>北京</li>
+          <li v-for="item in remen" :key="item.cityId">{{item.name}}</li>
         </ul>
       </div>
-      <div v-for="item in cityList" :key="item.py">
+      <div :id="`ho-${item.py}`" v-for="item in cityList" :key="item.py">
         <p>{{item.py}}</p>
         <ul>
           <li v-for="city in item.list" :key="city.cityId">{{city.name}}</li>
         </ul>
       </div>
-      <ul class="abc">
+      
+    </div>
+    <ul class="abc">
         <li>当前</li>
         <li>GPS</li>
         <li>热门</li>
-        <li v-for="item in cityList" :key="item.py">{{item.py}}</li>
+        <li v-for="item in cityList" :key="item.py" @click="fn1(item.py)">{{item.py}}</li>
       </ul>
-    </div>
   </div>
 </template>
 <script>
@@ -47,14 +48,19 @@ export default {
   name: 'city',
   data () {
     return {
-      cityList: []
+      cityList: [],//所有城市列表
+      remen:[] //热门城市
     }
   },
   methods: {
     goback () {
       this.$router.back()
     },
-    citysj: function () {}
+     fn1(py) {
+       let dom = document.getElementById(`ho-${py}`)
+       let top=dom.offsetTop
+       this.$refs.box.scrollTop=top
+     }
   },
 
   created () {
@@ -68,7 +74,13 @@ export default {
       // console.log( response.data.data.cities)
       let arr = response.data.data.cities
       let res = []
+      let rm = []
       arr.forEach(city => { // 循环
+        let sz = city.isHot//拿到热门城市的编号
+        if(sz>0){
+          rm.push(city)//判断大于0就是热门城市就push到rm数组中
+        }
+
         let py = city.pinyin.charAt(0).toUpperCase()// 循环拿到没一项的首字母
         let index = res.findIndex(item => item.py === py)// 判断方式
         if (index > -1) { // 判断这个首字母在数组中是否存在
@@ -84,9 +96,10 @@ export default {
       this.cityList = res.sort((a, b) => { // 升降排序
         return a.py.charCodeAt() - b.py.charCodeAt()
       })
-      // console.log(this.cityList)
+      this.remen=rm
+       //console.log(rm)
     })
-  }
+  },
 }
 </script>
 <style lang="scss">
@@ -110,6 +123,7 @@ export default {
   .xuanz {
     flex: 1;
     overflow: auto;
+    position: relative;
 
     div {
       p {
@@ -124,7 +138,8 @@ export default {
         padding: 12px 12px 12px 15px;
       }
     }
-    .abc {
+  }
+  .abc {
       position: absolute;
       width: 40px;
       text-align: center;
@@ -137,6 +152,5 @@ export default {
         line-height: 18px;
       }
     }
-  }
 }
 </style>
