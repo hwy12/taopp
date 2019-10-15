@@ -31,7 +31,7 @@
           <li v-for="city in item.list" :key="city.cityId">{{city.name}}</li>
         </ul>
       </div>
-      
+
     </div>
     <ul class="abc">
         <li>当前</li>
@@ -48,19 +48,19 @@ export default {
   name: 'city',
   data () {
     return {
-      cityList: [],//所有城市列表
-      remen:[] //热门城市
+      cityList: [], // 所有城市列表
+      remen: [] // 热门城市
     }
   },
   methods: {
     goback () {
       this.$router.back()
     },
-     fn1(py) {
-       let dom = document.getElementById(`ho-${py}`)
-       let top=dom.offsetTop
-       this.$refs.box.scrollTop=top
-     }
+    fn1 (py) {
+      let dom = document.getElementById(`ho-${py}`)
+      let top = dom.offsetTop
+      this.$refs.box.scrollTop = top
+    }
   },
 
   created () {
@@ -76,9 +76,9 @@ export default {
       let res = []
       let rm = []
       arr.forEach(city => { // 循环
-        let sz = city.isHot//拿到热门城市的编号
-        if(sz>0){
-          rm.push(city)//判断大于0就是热门城市就push到rm数组中
+        let sz = city.isHot// 拿到热门城市的编号
+        if (sz > 0) {
+          rm.push(city)// 判断大于0就是热门城市就push到rm数组中
         }
 
         let py = city.pinyin.charAt(0).toUpperCase()// 循环拿到没一项的首字母
@@ -96,10 +96,10 @@ export default {
       this.cityList = res.sort((a, b) => { // 升降排序
         return a.py.charCodeAt() - b.py.charCodeAt()
       })
-      this.remen=rm
-       //console.log(rm)
+      this.remen = rm
+      // console.log(rm)
     })
-  },
+  }
 }
 </script>
 <style lang="scss">
