@@ -9,29 +9,92 @@
 
     <form class="register-form">
       <div class="form-tel">
-        <input type="text" placeholder="请输入手机号码/用户名" />
+        <input type="tel" v-model="phone" placeholder="请输入手机号码/账号" />
+        <p>{{ userPhoneError }}</p>
       </div>
 
       <div class="form-tel">
-        <input type="password" placeholder="请输入密码" />
+        <input type="password" v-model="pwd" placeholder="请输入密码" />
+        <p>{{ userPwdError }}</p>
       </div>
 
       <!--register-form  end  -->
 
-      <div class="tel-erro">
+      <!-- <div class="tel-erro">
         <p>用户名或密码错误,请重新输入</p>
-      </div>
+      </div>-->
 
       <div class="tel-empty"></div>
 
       <!--tel-erro  end  -->
 
       <div class="register-button">
-        <button type="submit">登录</button>
+        <button type="submit" @click="login()">登录</button>
       </div>
     </form>
   </div>
 </template>
+
+<script>
+import axios from 'axios'
+export default {
+  data () {
+    return {
+      phone: '',
+      pwd: '',
+      userPhoneError: '',
+      userPwdError: '',
+      result: ''
+    }
+  },
+
+  methods: {
+    getdata () {
+      this.result.forEach(item => {
+        if (item.phone === this.phone) {
+          return true
+        } else {
+          return false
+        }
+      })
+    },
+    // checkphone() {
+    //   let phone = this.phone;
+    //   if (phone.length === 0) {
+    //     this.telEruserPhoneErrorror = "账号不能为空";
+    //   } else if (!/^1[3456789]\d{9}$/.test(phone)) {
+    //     this.telEruserPhoneErrorror = "手机号码有误,请重新输入";
+    //   } else if (this.getdata() === false) {
+    //     this.telEruserPhoneErrorror = "手机号码有误,请重新输入";
+    //   } else {
+    //     this.telEruserPhoneErrorror = "";
+    //   }
+    // },
+    // checkpwd() {},
+
+    login () {
+      console.log(this.result)
+      console.log(this.getdata())
+      this.result.forEach(item => {
+        if (item.phone === this.phone) {
+          console.log(true)
+        } else {
+          console.log(false)
+        }
+      })
+    }
+  },
+
+  created () {
+    axios.get('http://localhost:3000/todos').then(response => {
+      this.result = response.data
+      return this.result
+      // console.log(this.result);
+    })
+  }
+}
+</script>
+
 <style lang="scss">
 .page-login {
   .register-logo {
@@ -68,7 +131,6 @@
     .tel-erro {
       display: flex;
       justify-content: center;
-      // display: none;
 
       p {
         width: 320px;
@@ -85,7 +147,7 @@
 
     .tel-empty {
       height: 60px;
-      display: none;
+      // display: none;
     }
 
     .register-button {

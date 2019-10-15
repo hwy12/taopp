@@ -9,29 +9,121 @@
 
     <form class="register-form">
       <div class="form-tel">
-        <input type="tel" placeholder="请输入手机号码" />
+        <input type="tel" v-model="phone" @blur="checkphone()" placeholder="请输入手机号码" />
+        <p class="errorP">{{telError}}</p>
       </div>
 
       <div class="form-tel">
-        <input type="password" placeholder="请输入密码" />
+        <input type="password" v-model="pwd" @keyup="checkpwd()" placeholder="请输入密码" />
+        <p class="errorP">{{ pwdError }}</p>
       </div>
 
-      <!--register-form  end  -->
+      <router-link tag="p" class="phoneLogin" to="/login">账号密码登录</router-link>
 
-      <div class="tel-erro">
-        <p>手机格式错误,请输入正确的手机号码</p>
-      </div>
+      <!-- register-form  end  -->
 
       <div class="tel-empty"></div>
 
       <!--tel-erro  end  -->
 
       <div class="register-button">
-        <router-link tag="button" to="./login">注册</router-link>
+        <!-- <router-link tag="button" @click="register()" to="#">注册</router-link> -->
+        <button @click="register()">注册</button>
+      </div>
+
+      <div class="agreeItem">
+        <input type="checkbox" v-model="check" @click="checkagree()" />
+        <span class="agree">同意"服务条款"和"隐私权相关政策"</span>
+        <p class="agreeP">{{agreeMsg}}</p>
       </div>
     </form>
   </div>
 </template>
+
+<script>
+import axios from 'axios'
+export default {
+  data () {
+    return {
+      phone: '',
+      pwd: '',
+      agreeMsg: '',
+      telError: '',
+      pwdError: '',
+      check: true
+    }
+  },
+
+  methods: {
+    checkphone () {
+      let phone = this.phone
+      if (phone.length === 0) {
+        this.telError = '手机号码不能为空'
+      } else if (!/^1[3456789]\d{9}$/.test(phone)) {
+        this.telError = '手机号码有误,请重新输入'
+      } else {
+        this.telError = ''
+      }
+
+      return phone.length > 0
+    },
+
+    checkpwd () {
+      let word = this.pwd.trim()
+      if (word.length === 0) {
+        this.pwdError = '密码不能为空'
+      } else if (!/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/.test(word)) {
+        this.pwdError = ' 密码至少包含数字和英文，长度为6-20'
+      } else {
+        this.pwdError = ''
+      }
+
+      return word.length > 0
+    },
+
+    checkagree () {
+      if (this.check) {
+        this.agreeMsg = ''
+      } else {
+        this.agreeMsg = '必须勾选'
+      }
+      return this.check
+    },
+
+    register () {
+      var _this = this
+      if (this.checkphone() && this.checkpwd() && this.checkagree()) {
+        console.log('注册成功')
+        // 1. 使用输入的手机号,做一个查询操作,如果能够查询得到,就提示已经被注册过了.直接return
+        axios
+          .get('http://localhost:3000/todos', {
+            params: {
+              phone: this.phone
+            }
+          })
+          .then(response => {
+            let result = response.data
+            console.log(result)
+
+            if (result.length > 0) {
+              this.telError = '该手机号码已被注册'
+            } else {
+              // 2. 查询不到的时候,再做增加操作
+              axios.post('http://localhost:3000/todos', {
+                phone: this.phone,
+                pwd: this.pwd
+              })
+              _this.$router.push({ path: '/login' })
+            }
+          })
+      } else {
+        console.log('注册失败')
+      }
+    }
+  }
+}
+</script>
+
 <style lang="scss">
 .page-register {
   .register-logo {
@@ -63,29 +155,26 @@
         font-size: inherit;
         color: #333;
       }
-    }
 
-    .tel-erro {
-      display: flex;
-      justify-content: center;
-      // display: none;
+      .errorP {
+        width: 100%;
 
-      p {
-        width: 320px;
-        height: 44px;
-        line-height: 44px;
-        text-align: center;
-        background: rgb(0, 0, 0, 0.6);
-        color: #fff;
-        margin-top: 16px;
-        margin-bottom: 16px;
-        border-radius: 6px;
+        margin-top: 10px;
+        font-size: 14px;
+        color: #ff5000;
       }
     }
 
+    .phoneLogin {
+      margin-left: 20px;
+      padding-top: 20px;
+      color: #555;
+      font-size: 14px;
+    }
+
     .tel-empty {
-      height: 60px;
-      display: none;
+      height: 40px;
+      // display: none;
     }
 
     .register-button {
@@ -100,6 +189,22 @@
         border: none;
         font-size: 16px;
         color: #fff;
+      }
+    }
+
+    .agreeItem {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+      .agree {
+        font-size: 16px;
+        color: #333;
+      }
+
+      .agreeP {
+        font-size: 12px;
+        color: #ff5000;
+        margin-top: 5px;
       }
     }
   }
