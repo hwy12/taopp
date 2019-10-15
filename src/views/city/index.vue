@@ -3,23 +3,23 @@
     <!-- 一级路由，城市选择 -->
     <div class="nav">
       <div></div>
-      <h1>城市选择</h1>
+      <h1>选择城市</h1>
       <i class="iconfont icon-error" @click="goback"></i>
     </div>
     <div class="xuanz" ref="box">
-      <div>
+      <div id="ho-aa">
         <p>当前</p>
         <ul>
-          <li>北京</li>
+          <li>深圳</li>
         </ul>
       </div>
-      <div>
+      <div id="ho-ba">
         <p>GPS</p>
         <ul>
-          <li>北京</li>
+          <li>浏览器定位失败</li>
         </ul>
       </div>
-      <div>
+      <div id="ho-ca">
         <p>热门</p>
         <ul>
           <li v-for="item in remen" :key="item.cityId">{{item.name}}</li>
@@ -34,9 +34,9 @@
 
     </div>
     <ul class="abc">
-        <li>当前</li>
-        <li>GPS</li>
-        <li>热门</li>
+        <li @click="fn1('aa')">当前</li>
+        <li @click="fn1('ba')">GPS</li>
+        <li @click="fn1('ca')">热门</li>
         <li v-for="item in cityList" :key="item.py" @click="fn1(item.py)">{{item.py}}</li>
       </ul>
   </div>
