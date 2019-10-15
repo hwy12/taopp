@@ -3,42 +3,42 @@
     <!-- 一级路由，城市选择 -->
     <div class="nav">
       <div></div>
-      <h1>城市选择</h1>
+      <h1>选择城市</h1>
       <i class="iconfont icon-error" @click="goback"></i>
     </div>
-    <div class="xuanz">
-      <div>
+    <div class="xuanz" ref="box">
+      <div id="ho-aa">
         <p>当前</p>
         <ul>
-          <li>北京</li>
+          <li>深圳</li>
         </ul>
       </div>
-      <div>
+      <div id="ho-ba">
         <p>GPS</p>
         <ul>
-          <li>北京</li>
+          <li>浏览器定位失败</li>
         </ul>
       </div>
-      <div>
+      <div id="ho-ca">
         <p>热门</p>
         <ul>
-          <li>北京</li>
+          <li v-for="item in remen" :key="item.cityId">{{item.name}}</li>
         </ul>
       </div>
-      <div>
-        <p>A</p>
+      <div :id="`ho-${item.py}`" v-for="item in cityList" :key="item.py">
+        <p>{{item.py}}</p>
         <ul>
-          <li>北京</li>
+          <li v-for="city in item.list" :key="city.cityId">{{city.name}}</li>
         </ul>
       </div>
-      <ul class="abc">
-        <li>当前</li>
-        <li>GPS</li>
-        <li>热门</li>
-        <li>A</li>
-        <li>A</li>
-      </ul>
+
     </div>
+    <ul class="abc">
+        <li @click="fn1('aa')">当前</li>
+        <li @click="fn1('ba')">GPS</li>
+        <li @click="fn1('ca')">热门</li>
+        <li v-for="item in cityList" :key="item.py" @click="fn1(item.py)">{{item.py}}</li>
+      </ul>
   </div>
 </template>
 <script>
@@ -46,11 +46,21 @@ import axios from 'axios'
 
 export default {
   name: 'city',
+  data () {
+    return {
+      cityList: [], // 所有城市列表
+      remen: [] // 热门城市
+    }
+  },
   methods: {
     goback () {
       this.$router.back()
     },
-    citysj: function () {}
+    fn1 (py) {
+      let dom = document.getElementById(`ho-${py}`)
+      let top = dom.offsetTop
+      this.$refs.box.scrollTop = top
+    }
   },
 
   created () {
@@ -61,8 +71,33 @@ export default {
         'X-Host': 'mall.film-ticket.city.list'
       }
     }).then(response => {
-      let result = response.data
-      console.log(result)
+      // console.log( response.data.data.cities)
+      let arr = response.data.data.cities
+      let res = []
+      let rm = []
+      arr.forEach(city => { // 循环
+        let sz = city.isHot// 拿到热门城市的编号
+        if (sz > 0) {
+          rm.push(city)// 判断大于0就是热门城市就push到rm数组中
+        }
+
+        let py = city.pinyin.charAt(0).toUpperCase()// 循环拿到没一项的首字母
+        let index = res.findIndex(item => item.py === py)// 判断方式
+        if (index > -1) { // 判断这个首字母在数组中是否存在
+          res[index].list.push(city)// 存在就把这个城市直接添加到list这个数组中
+        } else {
+          let obj = {// 不存在就再开启一个对象 把城市存到这个对象的list数组中
+            py: py,
+            list: [city]
+          }
+          res.push(obj)
+        }
+      })
+      this.cityList = res.sort((a, b) => { // 升降排序
+        return a.py.charCodeAt() - b.py.charCodeAt()
+      })
+      this.remen = rm
+      // console.log(rm)
     })
   }
 }
@@ -103,12 +138,13 @@ export default {
         padding: 12px 12px 12px 15px;
       }
     }
-    .abc {
+  }
+  .abc {
       position: absolute;
       width: 40px;
       text-align: center;
       right: 0;
-      top: 12px;
+      top: 57px;
       color: #1394f3;
       font-size: 12px;
 
@@ -116,6 +152,5 @@ export default {
         line-height: 18px;
       }
     }
-  }
 }
 </style>
