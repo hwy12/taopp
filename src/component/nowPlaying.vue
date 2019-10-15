@@ -17,7 +17,7 @@
         </div>
         <div class="right">
           <div>
-            <button class="buy">购票</button>
+            <div class="buy">购票</div>
           </div>
         </div>
       </li>
@@ -37,7 +37,7 @@ export default {
     ul{
       margin-left: 15px;
     }
-    
+
      li {
       @include border-bottom;
       display: flex;
@@ -73,9 +73,10 @@ export default {
           height: 26px;
           border: none;
           background: #ff2e62;
-          border-radius: 13px; 
+          border-radius: 13px;
           color: #fff;
           line-height: 26px;
+          text-align: center;
           align-content: center;
         }
       }

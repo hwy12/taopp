@@ -42,16 +42,16 @@ import comingSoon from '../../component/comingSoon'
 export default {
   name: 'Films',
 
-// 注册局部组件
+  // 注册局部组件
 
   components: {
     nowPlaying,
     comingSoon
   },
 
-  data() {
+  data () {
     return {
-      curFilmType: 'nowPlaying', //默认当前影片类型
+      curFilmType: 'nowPlaying' // 默认当前影片类型
     }
   },
 
@@ -59,8 +59,8 @@ export default {
     /**
      * 切换当前影片类型
      */
-    chgFilmType(type) {
-      this.curFilmType = type;
+    chgFilmType (type) {
+      this.curFilmType = type
     }
   }
 
@@ -107,7 +107,7 @@ export default {
         line-height: 50px;
         padding: 0 15px;
         color: #777;
-        
+
         &.active {
           color: #ff2e62;
         }
@@ -120,7 +120,7 @@ export default {
       width: 50%;
       height: 2px;
       transition: left 0.5s;
-      
+
       span{
         display: block;
         width: 16px;
