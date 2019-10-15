@@ -25,18 +25,17 @@
           <li>北京</li>
         </ul>
       </div>
-      <div>
-        <p>A</p>
+      <div v-for="item in cityList" :key="item.py">
+        <p>{{item.py}}</p>
         <ul>
-          <li>北京</li>
+          <li v-for="city in item.list" :key="city.cityId">{{city.name}}</li>
         </ul>
       </div>
       <ul class="abc">
         <li>当前</li>
         <li>GPS</li>
         <li>热门</li>
-        <li>A</li>
-        <li>A</li>
+        <li v-for="item in cityList" :key="item.py">{{item.py}}</li>
       </ul>
     </div>
   </div>
@@ -46,6 +45,11 @@ import axios from 'axios'
 
 export default {
   name: 'city',
+  data () {
+    return {
+      cityList: []
+    }
+  },
   methods: {
     goback () {
       this.$router.back()
@@ -61,8 +65,26 @@ export default {
         'X-Host': 'mall.film-ticket.city.list'
       }
     }).then(response => {
-      let result = response.data
-      console.log(result)
+      // console.log( response.data.data.cities)
+      let arr = response.data.data.cities
+      let res = []
+      arr.forEach(city => { // 循环
+        let py = city.pinyin.charAt(0).toUpperCase()// 循环拿到没一项的首字母
+        let index = res.findIndex(item => item.py === py)// 判断方式
+        if (index > -1) { // 判断这个首字母在数组中是否存在
+          res[index].list.push(city)// 存在就把这个城市直接添加到list这个数组中
+        } else {
+          let obj = {// 不存在就再开启一个对象 把城市存到这个对象的list数组中
+            py: py,
+            list: [city]
+          }
+          res.push(obj)
+        }
+      })
+      this.cityList = res.sort((a, b) => { // 升降排序
+        return a.py.charCodeAt() - b.py.charCodeAt()
+      })
+      // console.log(this.cityList)
     })
   }
 }
@@ -88,7 +110,6 @@ export default {
   .xuanz {
     flex: 1;
     overflow: auto;
-    position: relative;
 
     div {
       p {
@@ -108,7 +129,7 @@ export default {
       width: 40px;
       text-align: center;
       right: 0;
-      top: 12px;
+      top: 57px;
       color: #1394f3;
       font-size: 12px;
 
