@@ -5,7 +5,7 @@
     <div class="center-header">
       <div>
         <img src="http://gw.alicdn.com/tfs/TB1GJJtd2WG3KVjSZPcXXbkbXXa-180-180.png_.webp" alt />
-        <p>张三</p>
+        <p>{{ userInfo.phone }}</p>
       </div>
     </div>
 
@@ -40,6 +40,19 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'Center',
+
+  data () {
+    return {
+      userInfo: JSON.parse(window.localStorage.getItem('userInfo'))
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
 .page-home {
   height: 667px;

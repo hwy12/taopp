@@ -9,22 +9,36 @@
 
     <form class="register-form">
       <div class="form-tel">
-        <input type="tel" v-model="phone" placeholder="请输入手机号码/账号" />
-        <p>{{ userPhoneError }}</p>
+        <input
+          type="tel"
+          v-model="phone"
+          @focus="inputphoneEnter"
+          @blur="inputphoneLeave"
+          placeholder="请输入手机号码/账号"
+        />
+        <p class="inputTip">{{ userPhoneTip }}</p>
       </div>
 
       <div class="form-tel">
-        <input type="password" v-model="pwd" placeholder="请输入密码" />
-        <p>{{ userPwdError }}</p>
+        <input
+          type="password"
+          v-model="pwd"
+          @focus="inputpwdEnter"
+          @blur="inputpwdLeave"
+          placeholder="请输入密码"
+        />
+        <p class="inputTip">{{ userPwdTip }}</p>
       </div>
+
+      <router-link tag="p" class="phoneRegister" to="/register">用户注册</router-link>
 
       <!--register-form  end  -->
 
-      <!-- <div class="tel-erro">
+      <div class="tel-erro" v-if="isShow">
         <p>用户名或密码错误,请重新输入</p>
-      </div>-->
+      </div>
 
-      <div class="tel-empty"></div>
+      <div class="tel-empty" v-if="!isShow"></div>
 
       <!--tel-erro  end  -->
 
@@ -42,55 +56,62 @@ export default {
     return {
       phone: '',
       pwd: '',
-      userPhoneError: '',
-      userPwdError: '',
-      result: ''
+      userPhoneTip: '',
+      userPwdTip: '',
+      isShow: false
     }
   },
 
   methods: {
-    getdata () {
-      this.result.forEach(item => {
-        if (item.phone === this.phone) {
-          return true
-        } else {
-          return false
-        }
-      })
+    inputphoneEnter () {
+      this.userPhoneTip = '请输入11位数手机号码'
     },
-    // checkphone() {
-    //   let phone = this.phone;
-    //   if (phone.length === 0) {
-    //     this.telEruserPhoneErrorror = "账号不能为空";
-    //   } else if (!/^1[3456789]\d{9}$/.test(phone)) {
-    //     this.telEruserPhoneErrorror = "手机号码有误,请重新输入";
-    //   } else if (this.getdata() === false) {
-    //     this.telEruserPhoneErrorror = "手机号码有误,请重新输入";
-    //   } else {
-    //     this.telEruserPhoneErrorror = "";
-    //   }
-    // },
-    // checkpwd() {},
+    inputphoneLeave () {
+      this.userPhoneTip = ''
+    },
+
+    inputpwdEnter () {
+      this.userPwdTip = '请输入密码'
+    },
+    inputpwdLeave () {
+      this.userPwdTip = ''
+    },
 
     login () {
-      console.log(this.result)
-      console.log(this.getdata())
-      this.result.forEach(item => {
-        if (item.phone === this.phone) {
-          console.log(true)
-        } else {
-          console.log(false)
-        }
-      })
-    }
-  },
+      var _this = this
+      // 根据输入的账号密码查询数据库
+      axios
+        .get('http://localhost:3000/todos', {
+          params: {
+            phone: this.phone,
+            pwd: this.pwd
+          }
+        })
+        .then(response => {
+          let result = response.data
 
-  created () {
-    axios.get('http://localhost:3000/todos').then(response => {
-      this.result = response.data
-      return this.result
-      // console.log(this.result);
-    })
+          console.log(result)
+          // console.log(result[0].phone);
+          // 若该用户存在且账号密码输入正确则返回该用户信息,表示登录成功,否则登录失败
+          if (result.length > 0) {
+            console.log('登录成功')
+            window.localStorage.setItem(
+              'userInfo',
+              JSON.stringify({
+                phone: _this.phone,
+                pwd: _this.pwd
+              })
+            )
+
+            let redirect = _this.$route.query.redirect || '/films'
+            _this.$router.replace(redirect)
+            _this.isShow = false
+          } else {
+            console.log('登录失败')
+            _this.isShow = true
+          }
+        })
+    }
   }
 }
 </script>
@@ -126,6 +147,19 @@ export default {
         font-size: inherit;
         color: #333;
       }
+
+      .inputTip {
+        margin-top: 5px;
+        color: #ff5000;
+        font-size: 12px;
+      }
+    }
+
+    .phoneRegister {
+      margin-left: 20px;
+      margin-top: 20px;
+      color: #555;
+      font-size: 14px;
     }
 
     .tel-erro {
@@ -146,7 +180,7 @@ export default {
     }
 
     .tel-empty {
-      height: 60px;
+      height: 40px;
       // display: none;
     }
 
