@@ -22,7 +22,7 @@ export default {
           cityId: 440300,
           pageNum: 1,
           pageSize: 10,
-          type: 1,
+          type: payload.type,
           k: 5608586
         },
         headers: {

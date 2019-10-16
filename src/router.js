@@ -56,7 +56,7 @@ const router = new Router({
       component: City
     },
     {
-      path: '/film',
+      path: '/film/:id',
       component: Film
     },
     {

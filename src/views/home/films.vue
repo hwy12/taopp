@@ -70,6 +70,7 @@ export default {
 <style lang="scss">
 @import '../../assets/styles/common/mixins.scss';
 .page-home {
+
   .head {
     height: 50px;
     display: flex;
