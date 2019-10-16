@@ -7,7 +7,7 @@
     <div class="head">
       <!-- city 城市 -->
 
-      <router-link to="/city" class="city i-logo">
+      <router-link tag="p" to="city" class="city i-logo">
         <div>北京</div>
         <i class="iconfont icon-xiajiantou"></i>
       </router-link>
@@ -42,16 +42,16 @@ import comingSoon from '../../component/comingSoon'
 export default {
   name: 'Films',
 
-// 注册局部组件
+  // 注册局部组件
 
   components: {
     nowPlaying,
     comingSoon
   },
 
-  data() {
+  data () {
     return {
-      curFilmType: 'nowPlaying', //默认当前影片类型
+      curFilmType: 'nowPlaying' // 默认当前影片类型
     }
   },
 
@@ -59,8 +59,8 @@ export default {
     /**
      * 切换当前影片类型
      */
-    chgFilmType(type) {
-      this.curFilmType = type;
+    chgFilmType (type) {
+      this.curFilmType = type
     }
   }
 
@@ -88,10 +88,12 @@ export default {
 
       div {
         display: inline-block;
+        color: #000;
       }
 
       i{
         margin-left: 5px;
+        color: #000;
       }
     }
   }
@@ -105,9 +107,9 @@ export default {
       li {
         height: 50px;
         line-height: 50px;
-        padding: 0 15px;
+        padding: 0 10px;
         color: #777;
-        
+
         &.active {
           color: #ff2e62;
         }
@@ -120,7 +122,7 @@ export default {
       width: 50%;
       height: 2px;
       transition: left 0.5s;
-      
+
       span{
         display: block;
         width: 16px;

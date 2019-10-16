@@ -1,13 +1,13 @@
-// import Vue from 'vue'
-// import Vuex from 'Vuex'
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-// import CinemasModule from './modules/cinemas'
+import FilmModule from './modules/film'
 
-// Vue.use(Vuex)
-// const store =new Vuex.Store({
-//     modules:{
-//         cinemas:CinemasModule
-//     }
-// })
+Vue.use(Vuex)
+const store = new Vuex.Store({
+  modules: {
+    film: FilmModule
+  }
+})
 
-// export default store
+export default store

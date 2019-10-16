@@ -1,0 +1,217 @@
+[33mcommit bff1e53f42796a6e09a278e2bc524063343531d1[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m)[m
+Merge: 1c3ee31 abdc5f9
+Author: Qu Daifeng <2500921028qq@.com>
+Date:   Tue Oct 15 20:37:48 2019 +0800
+
+    Merge branch 'develop' of https://github.com/hwy12/taopp into develop
+
+[33mcommit abdc5f9bac50224a29137687250a217f701ad222[m
+Author: xxxx <xxxx@163.com>
+Date:   Tue Oct 15 20:33:06 2019 +0800
+
+    项目完成
+
+[33mcommit 1c3ee31bdc3c77e2af3cb4bc7b39d07483a2a2b1[m
+Author: Qu Daifeng <2500921028qq@.com>
+Date:   Tue Oct 15 20:25:39 2019 +0800
+
+    头部及电影列表结构完成
+
+[33mcommit 1cb3b3ce40f2a190df31dc57f3098ad966c84fcb[m
+Author: xxxx <xxxx@163.com>
+Date:   Tue Oct 15 17:33:20 2019 +0800
+
+    城市点击下拉效果
+
+[33mcommit 77cccf48e26b57ac7c9a7c40e3c417b5815dce1d[m
+Author: xxxx <xxxx@163.com>
+Date:   Tue Oct 15 17:31:08 2019 +0800
+
+    城市点击下拉
+
+[33mcommit 0dddc7c538290e6ed17c3fc9ad2625c98d50291d[m
+Merge: 1127eb5 371d2e6
+Author: xxxx <xxxx@163.com>
+Date:   Tue Oct 15 15:35:17 2019 +0800
+
+    Merge branch 'develop' of https://github.com/hwy12/taopp into develop
+
+[33mcommit 1127eb55ae34412becd4f8060bd3320f949b3c52[m
+Author: xxxx <xxxx@163.com>
+Date:   Tue Oct 15 15:34:58 2019 +0800
+
+    城市选择列表
+
+[33mcommit 371d2e60cf545e3a4d308e4df33deb0943ecffa1[m
+Author: Qu Daifeng <2500921028qq@.com>
+Date:   Tue Oct 15 08:59:24 2019 +0800
+
+    影片列表页面头部样式
+
+[33mcommit 80585b1975f56e6e63cd1bd630dc10cddeae77c0[m
+Merge: 85dce51 cb07ba1
+Author: Qu Daifeng <2500921028qq@.com>
+Date:   Mon Oct 14 22:24:02 2019 +0800
+
+    电影院
+
+[33mcommit 85dce51317c4363c8ba31d8bfa9a33b645961c16[m
+Author: Qu Daifeng <2500921028qq@.com>
+Date:   Mon Oct 14 22:20:28 2019 +0800
+
+    电影列表头部
+
+[33mcommit cb07ba1ab54340f255aa0abe8c477a74c2a06472[m
+Author: carey0426 <miaozy0426@163.com>
+Date:   Mon Oct 14 22:19:57 2019 +0800
+
+    '影院详情页面'
+
+[33mcommit d6b2b4124fcbf4721dc834dec7f3919f657aeb7e[m
+Merge: ead9c14 eba132f
+Author: shujing <1059726649@qq.com>
+Date:   Mon Oct 14 22:12:27 2019 +0800
+
+    Merge branch 'develop' of https://github.com/hwy12/taopp into develop
+
+[33mcommit ead9c142e06f477c5c531d39ccdae3f35979ae0a[m
+Author: shujing <1059726649@qq.com>
+Date:   Mon Oct 14 22:11:51 2019 +0800
+
+    '登录静态修改'
+
+[33mcommit eba132f78985cbb035c8ea4fe5743a32024319d1[m
+Author: xxxx <xxxx@163.com>
+Date:   Mon Oct 14 22:11:36 2019 +0800
+
+    city基本结构
+
+[33mcommit 9b668debf4702fb9acdd14459b40454661f0201f[m
+Author: shujing <1059726649@qq.com>
+Date:   Mon Oct 14 21:53:51 2019 +0800
+
+    '注册和登录静态'
+
+[33mcommit 8d4c5424577c076accb869033c72ee8ac061d106[m
+Author: xxxx <xxxx@163.com>
+Date:   Mon Oct 14 21:30:40 2019 +0800
+
+    删除城市列表页面 axios
+
+[33mcommit ce60ec4d95f5a323252b57ad1fd65ffb7a6e1e6c[m
+Author: xxxx <xxxx@163.com>
+Date:   Mon Oct 14 21:28:24 2019 +0800
+
+    '城市选择页面'
+
+[33mcommit de60c93b03f300e728f659880db48fadc5aa96c8[m
+Author: carey0426 <miaozy0426@163.com>
+Date:   Mon Oct 14 21:21:16 2019 +0800
+
+    '解决eslint代码风格'
+
+[33mcommit 2fbffdf87163f764a6fa4a7cfb27cee26d7648bb[m
+Merge: 9367225 fe9aa9a
+Author: carey0426 <miaozy0426@163.com>
+Date:   Mon Oct 14 21:18:50 2019 +0800
+
+    '解决冲突'
+
+[33mcommit 9367225c078c58dceb8453d60f975953a3507ba7[m
+Author: carey0426 <miaozy0426@163.com>
+Date:   Mon Oct 14 21:17:40 2019 +0800
+
+    '解决冲突1'
+
+[33mcommit fe9aa9a1de9e223fcd0bb80c22ac598fec142ed7[m
+Merge: a6769ae 8b066c6
+Author: shujing <1059726649@qq.com>
+Date:   Mon Oct 14 21:15:45 2019 +0800
+
+    处理冲突
+
+[33mcommit 53cba1153a9b3960a285deabb1a394aadc0ce03d[m
+Author: Qu Daifeng <2500921028qq@.com>
+Date:   Mon Oct 14 21:03:21 2019 +0800
+
+    电影列表头部
+
+[33mcommit a6769ae5c5c0d747e1b18ff271c04a82109569d7[m
+Author: shujing <1059726649@qq.com>
+Date:   Mon Oct 14 20:56:19 2019 +0800
+
+    'register'
+
+[33mcommit 8b066c6efe5da35636a84ffbd997657ccb2581c2[m
+Merge: 9e2fa8d 097ec88
+Author: carey0426 <miaozy0426@163.com>
+Date:   Mon Oct 14 20:46:15 2019 +0800
+
+    'axios'
+
+[33mcommit 9e2fa8d86a51678764a1f11aa39d19471721c074[m
+Author: carey0426 <miaozy0426@163.com>
+Date:   Mon Oct 14 20:37:12 2019 +0800
+
+    '电影详情的axios数据请求'
+
+[33mcommit 34e35e20f7dc51605b6ebfb9529cb0c48932dc9e[m
+Author: carey0426 <miaozy0426@163.com>
+Date:   Mon Oct 14 19:18:51 2019 +0800
+
+    '影院详情页页面'
+
+[33mcommit 097ec888bf919d9ca75bfec55f885270a6352500[m
+Author: xxxx <xxxx@163.com>
+Date:   Mon Oct 14 18:01:14 2019 +0800
+
+    'city'
+
+[33mcommit 6601e26eac8894489f85e54e18cd48fc87e90cdc[m
+Merge: 2e4b529 4c3abb9
+Author: xxxx <xxxx@163.com>
+Date:   Mon Oct 14 17:09:40 2019 +0800
+
+    Merge branch 'develop' of https://github.com/hwy12/taopp into develop
+
+[33mcommit 4c3abb9020412d1c248923c87dd04eb6c3682261[m
+Author: shujing <1059726649@qq.com>
+Date:   Mon Oct 14 16:37:05 2019 +0800
+
+    'center-header'
+
+[33mcommit 2e4b529cd61e7bfafe5646f41ae39e96a9a80f5a[m
+Author: xxxx <xxxx@163.com>
+Date:   Mon Oct 14 16:35:32 2019 +0800
+
+    'iconfont'
+
+[33mcommit cdf7e249bfb18c6f55983d1de2a81e0e7795aa0e[m
+Author: xxxx <xxxx@163.com>
+Date:   Mon Oct 14 14:39:32 2019 +0800
+
+    '样式清除'
+
+[33mcommit 88749c90d921d12fbadaf290f69e2fdf0f8b72bb[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: xxxx <xxxx@163.com>
+Date:   Sun Oct 13 17:59:43 2019 +0800
+
+    '搭建完成'
+
+[33mcommit da51600fb5e19a780cb3a57a5d520445817c1569[m
+Author: xxxx <xxxx@163.com>
+Date:   Sun Oct 13 14:22:38 2019 +0800
+
+    '项目结构'
+
+[33mcommit e33beb4b662f1aaa2eb2831fe1fa6e6694a5c648[m
+Author: xxxx <xxxx@163.com>
+Date:   Sat Oct 12 17:53:02 2019 +0800
+
+    '项目搭建'
+
+[33mcommit 2dc45026cd70682196fbda9c841b0110ca7aa98f[m
+Author: xxxx <xxxx@163.com>
+Date:   Sat Oct 12 17:06:15 2019 +0800
+
+    init

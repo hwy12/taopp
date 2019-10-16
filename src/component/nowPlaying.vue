@@ -2,9 +2,9 @@
   <div class="film-list">
     <!-- 正在热映 -->
     <ul>
-      <li>
+      <li v-for="film in filmList" :key="film.filmId">
         <div class="left">
-          <img src="https://static.maizuo.com/pc/v5/usr/movie/ab0ee357e3fb0718059df8d8717a1bf7.jpg?x-oss-process=image/quality,Q_70" alt="">
+          <img :src="film.poster" alt />
         </div>
         <div class="center">
           <div class="name">中国机长</div>
@@ -17,7 +17,7 @@
         </div>
         <div class="right">
           <div>
-            <button class="buy">购票</button>
+            <div class="buy">购票</div>
           </div>
         </div>
       </li>
@@ -26,8 +26,22 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
-  name: 'NowPlaying'
+  name: 'NowPlaying',
+
+  computed: {
+    ...mapState('film', ['filmList'])
+  },
+
+  methods: {
+    ...mapActions('film', ['getFilmList'])
+  },
+
+  created () {
+    this.getFilmList()
+  }
 }
 </script>
 
@@ -37,7 +51,7 @@ export default {
     ul{
       margin-left: 15px;
     }
-    
+
      li {
       @include border-bottom;
       display: flex;
@@ -73,10 +87,12 @@ export default {
           height: 26px;
           border: none;
           background: #ff2e62;
-          border-radius: 13px; 
+          border-radius: 13px;
+          text-align: center;
           color: #fff;
           line-height: 26px;
           align-content: center;
+          font-size: 12px;
         }
       }
     }
