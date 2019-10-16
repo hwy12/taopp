@@ -41,87 +41,88 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-  data () {
+  name: "Register",
+  data() {
     return {
-      phone: '',
-      pwd: '',
-      agreeMsg: '',
-      telError: '',
-      pwdError: '',
+      phone: "",
+      pwd: "",
+      agreeMsg: "",
+      telError: "",
+      pwdError: "",
       check: true
-    }
+    };
   },
 
   methods: {
-    checkphone () {
-      let phone = this.phone
+    checkphone() {
+      let phone = this.phone;
       if (phone.length === 0) {
-        this.telError = '手机号码不能为空'
+        this.telError = "手机号码不能为空";
       } else if (!/^1[3456789]\d{9}$/.test(phone)) {
-        this.telError = '手机号码有误,请重新输入'
+        this.telError = "手机号码有误,请重新输入";
       } else {
-        this.telError = ''
+        this.telError = "";
       }
 
-      return phone.length > 0
+      return phone.length > 0;
     },
 
-    checkpwd () {
-      let word = this.pwd.trim()
+    checkpwd() {
+      let word = this.pwd.trim();
       if (word.length === 0) {
-        this.pwdError = '密码不能为空'
+        this.pwdError = "密码不能为空";
       } else if (!/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/.test(word)) {
-        this.pwdError = ' 密码至少包含数字和英文，长度为6-20'
+        this.pwdError = " 密码至少包含数字和英文，长度为6-20";
       } else {
-        this.pwdError = ''
+        this.pwdError = "";
       }
 
-      return word.length > 0
+      return word.length > 0;
     },
 
-    checkagree () {
+    checkagree() {
       if (this.check) {
-        this.agreeMsg = ''
+        this.agreeMsg = "";
       } else {
-        this.agreeMsg = '必须勾选'
+        this.agreeMsg = "必须勾选";
       }
-      return this.check
+      return this.check;
     },
 
-    register () {
-      var _this = this
+    register() {
+      var _this = this;
       if (this.checkphone() && this.checkpwd() && this.checkagree()) {
-        console.log('注册成功')
+        console.log("注册成功");
         // 1. 使用输入的手机号,做一个查询操作,如果能够查询得到,就提示已经被注册过了.直接return
         axios
-          .get('http://localhost:3000/todos', {
+          .get("http://localhost:3000/todos", {
             params: {
               phone: this.phone
             }
           })
           .then(response => {
-            let result = response.data
-            console.log(result)
+            let result = response.data;
+            console.log(result);
 
             if (result.length > 0) {
-              this.telError = '该手机号码已被注册'
+              this.telError = "该手机号码已被注册";
             } else {
               // 2. 查询不到的时候,再做增加操作
-              axios.post('http://localhost:3000/todos', {
+              axios.post("http://localhost:3000/todos", {
                 phone: this.phone,
                 pwd: this.pwd
-              })
-              _this.$router.push({ path: '/login' })
+              });
+              _this.$router.push({ path: "/login" });
             }
-          })
+          });
       } else {
-        console.log('注册失败')
+        console.log("注册失败");
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

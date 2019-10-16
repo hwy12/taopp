@@ -50,70 +50,71 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-  data () {
+  name: "Login",
+  data() {
     return {
-      phone: '',
-      pwd: '',
-      userPhoneTip: '',
-      userPwdTip: '',
+      phone: "",
+      pwd: "",
+      userPhoneTip: "",
+      userPwdTip: "",
       isShow: false
-    }
+    };
   },
 
   methods: {
-    inputphoneEnter () {
-      this.userPhoneTip = '请输入11位数手机号码'
+    inputphoneEnter() {
+      this.userPhoneTip = "请输入11位数手机号码";
     },
-    inputphoneLeave () {
-      this.userPhoneTip = ''
-    },
-
-    inputpwdEnter () {
-      this.userPwdTip = '请输入密码'
-    },
-    inputpwdLeave () {
-      this.userPwdTip = ''
+    inputphoneLeave() {
+      this.userPhoneTip = "";
     },
 
-    login () {
-      var _this = this
+    inputpwdEnter() {
+      this.userPwdTip = "请输入密码";
+    },
+    inputpwdLeave() {
+      this.userPwdTip = "";
+    },
+
+    login() {
+      var _this = this;
       // 根据输入的账号密码查询数据库
       axios
-        .get('http://localhost:3000/todos', {
+        .get("http://localhost:3000/todos", {
           params: {
             phone: this.phone,
             pwd: this.pwd
           }
         })
         .then(response => {
-          let result = response.data
+          let result = response.data;
 
-          console.log(result)
+          console.log(result);
           // console.log(result[0].phone);
           // 若该用户存在且账号密码输入正确则返回该用户信息,表示登录成功,否则登录失败
           if (result.length > 0) {
-            console.log('登录成功')
+            console.log("登录成功");
             window.localStorage.setItem(
-              'userInfo',
+              "userInfo",
               JSON.stringify({
                 phone: _this.phone,
                 pwd: _this.pwd
               })
-            )
+            );
 
-            let redirect = _this.$route.query.redirect || '/films'
-            _this.$router.replace(redirect)
-            _this.isShow = false
+            let redirect = _this.$route.query.redirect || "/films";
+            _this.$router.replace(redirect);
+            _this.isShow = false;
           } else {
-            console.log('登录失败')
-            _this.isShow = true
+            console.log("登录失败");
+            _this.isShow = true;
           }
-        })
+        });
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
