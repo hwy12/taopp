@@ -3,9 +3,9 @@
         <!-- 二级路由页，影院列表 -->
         <router-view></router-view>
         <ul class="cinemasUl">
-            <li class="cinemasLi" v-for='cinemas in cinemasList' :key='cinemas.cinemaId'>
+            <router-link tag="li" :to="`/${cinemas.cinemaId}/cinema`" class="cinemasLi" v-for='cinemas in cinemasList' :key='cinemas.cinemaId'>
                 <div class="list-item-container">
-                    <a href="#" class="list-item-in list-item-anchor">
+                    <a  class="list-item-in list-item-anchor" >
                         <h3 class="list-title-warper">
                             <div class="list-title-left">
                                 <span class="list-title ">{{cinemas.name}}</span>
@@ -30,7 +30,7 @@
                     </a>
                     <div class="line"></div>
                 </div>
-            </li>
+            </router-link>
         </ul>
     </div>
 </template>
@@ -40,15 +40,19 @@ export default {
   name: 'Cinemas',
   data () {
     return {
-      cinemasList: []
+      cinemasList: [],
+      id: 111
     }
+  },
+  methods: {
+
   },
   created: function () {
     axios.get('https://m.maizuo.com/gateway', {
       params: {
         cityId: 440300,
         ticketFlag: 1,
-        k: 1218797
+        k: 4297776
       },
       headers: {
         'X-Client-Info':
@@ -58,8 +62,6 @@ export default {
     })
       .then(response => {
         this.cinemasList = response.data.data.cinemas
-        console.log(response.data.data.cinemas)
-        //    console.log(response)
       })
   }
 }
