@@ -16,7 +16,8 @@
     <div class="swiper-container box" ref="slider">
       <div class="swiper-wrapper" v-if="filmsList[this.showDateIndex]">
         <div class="swiper-slide" v-for="(films,index) in filmsList" :key="index">
-          <img :src="films.poster " @click="clickfun(index,$event)" ref="img" />
+          <!-- <img :src="films.poster " @click="clickfun(index,$event)" ref="img" /> -->
+          <img :src="films.poster " ref="img" />
         </div>
       </div>
     </div>
@@ -32,8 +33,8 @@
       <li v-for="(date,index) in showDate" :key="index" @click="getShowDateIndex(index)">
         <div class="cn-date">{{formatCnDate(date)}}</div>
         <div class="num-date">{{formatNumDate(date)}}</div>
-        <div class="active-line" v-if="active"></div>
       </li>
+      <div id="active-line"></div>
     </ul>
     <ul class="schedules-list">
       <li v-for="schedule in scheduleList" :key="schedule.id">
@@ -57,7 +58,7 @@
             </div>
             <div class="item-contain">
               <span class="item-end">
-                {{formatEndAt(schedule.endAt)}}散场
+                {{formatShowAt(schedule.endAt)}}散场
                 <span class="item-hall">{{schedule.hallName}}</span>
               </span>
             </div>
@@ -71,12 +72,12 @@
   </div>
 </template>
 <script>
-import Swiper from 'swiper'
-import axios from 'axios'
-import moment from 'moment'
+import Swiper from "swiper";
+import axios from "axios";
+import moment from "moment";
 export default {
-  name: 'CinemaDetail',
-  data () {
+  name: "CinemaDetail",
+  data() {
     return {
       active: true,
       filmsList: [], // 影片详情列表数组
@@ -87,141 +88,117 @@ export default {
       getIndex: 0, // 今天明天日期数据的下标
       filmId: 1, // 影片id
       dateId: 1 // 影片播放列表id
-    }
+    };
   },
   methods: {
-    clickfun (index, $event) {
-      // 点击图片事件
-      // $event.target.style.cssText = 'width:70px'
-
-      this.getIndex = index
-      console.log(this.getIndex)
-      // this.getShowDateIndex(),
-      // this.getScheduleList(this.getIndex);
-      this.getShowDateIndex(this.getIndex)
-    },
-    getShowDateIndex (index) {
+    getShowDateIndex(index) {
       // 点击日期事件
-      this.getIndex = index
-      this.dateId = this.filmsList[this.showDateIndex].showDate[this.getIndex]
-      // console.log(this.dateId);
-      this.filmId = this.filmsList[this.showDateIndex].filmId
-      this.getScheduleList(this.getIndex)
+      this.getIndex = index; //动态改变今天明天日期数据的下标
+      // console.log(index);
+      // console.log(  this.filmsList[this.showDateIndex].showDate)
+      this.dateId = this.filmsList[this.showDateIndex].showDate[this.getIndex]; //通过点击日期修改影片播放列表的id
+      // console.log(this.filmsList[this.showDateIndex].showDate[this.getIndex]);
+      this.filmId = this.filmsList[this.showDateIndex].filmId; //
+      this.getScheduleList(this.getIndex);
+      let activeLine =1;
     },
-    fn () {
-      this.showDate = this.filmsList[this.showDateIndex].showDate
-      console.log(this.showDate)
-    },
-    formatCnDate (date) {
+    formatCnDate(date) {
       // 今天
-      let dateNum = date * 1000
-      moment.locale('zh-cn')
-      return moment(dateNum).calendar('', {
-        // 调用moment插件事件格式化
-        sameDay: '[今天]',
-        nextDay: '[明天]',
-        nextWeek: 'ddd',
-        lastWeek: 'ddd',
-        sameElse: 'ddd'
-      })
-      // return moment(date)
+      let dateNum = date * 1000;
+      moment.locale("zh-cn");
+      return moment(dateNum).calendar("", {
+        // 调用moment插件事件格式化时间
+        sameDay: "[今天]",
+        nextDay: "[明天]",
+        nextWeek: "ddd",
+        lastWeek: "ddd",
+        sameElse: "ddd"
+      });
     },
-    formatNumDate (date) {
-      // 10月19
-      let dateNum = date * 1000
-      moment.locale('zh-cn')
-      return moment(dateNum).format('MMMDD日')
+    formatNumDate(date) {
+      let dateNum = date * 1000; // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      moment.locale("zh-cn");
+      return moment(dateNum).format("MMMDD日");
     },
-    formatActors (actors) {
+    formatActors(actors) {
       let tmp = actors.map(item => {
-        return item.name
-      })
-      return tmp.join('、')
+        return item.name;
+      });
+      return tmp.join("、");
     },
-    formatShowAt (time) {
-      let date = new Date(time * 1000) // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
-      let h = date.getHours() + ':'
+    formatShowAt(time) {
+      let date = new Date(time * 1000); // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      let h = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
       let m =
-        date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
-      return h + m
-    },
-    formatEndAt (time) {
-      let date = new Date(time * 1000) // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
-      let h = date.getHours() + ':'
-      let m =
-        date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
-      return h + m
+        date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+      return h + ":" + m;
     },
 
     /**
      * 获取影院基本信息
      */
-    getCinemaInfo () {
+    getCinemaInfo() {
       axios
-        .get('https://m.maizuo.com/gateway', {
+        .get("https://m.maizuo.com/gateway", {
           // 电影列表
           params: {
             cinemaId: this.$route.params.id,
             k: 5597837
           },
           headers: {
-            'X-Client-Info':
+            "X-Client-Info":
               '{"a":"3000","ch":"1002","v":"5.0.4","e":"157052860619327352833105"}',
-            'X-Host': 'mall.film-ticket.film.cinema-show-film'
+            "X-Host": "mall.film-ticket.film.cinema-show-film"
           }
         })
         .then(response => {
-          this.filmsList = response.data.data.films
-          this.fn()
-          // console.log(this.filmsList)
-          // console.log(this.filmId);
-          this.filmId = this.filmsList[0].filmId
-          this.dateId = this.filmsList[0].showDate[0]
-          // console.log(this.dateId);
-          this.getScheduleList()
-        })
+          this.filmsList = response.data.data.films;
+          this.showDate = this.filmsList[this.showDateIndex].showDate;
+          this.filmId = this.filmsList[0].filmId;
+          this.dateId = this.filmsList[0].showDate[0];
+          this.getScheduleList(); //getScheduleList这个请求需要在获取影院基本信息和获取影片基本信息之后才可以发送
+        });
     },
-
-    getFilmListByCinema (index) {
+    /*****
+     * 获取影片基本信息
+     */
+    getFilmListByCinema(index) {
       axios
-        .get('https://m.maizuo.com/gateway', {
+        .get("https://m.maizuo.com/gateway", {
           params: {
             cinemaId: this.$route.params.id,
             k: 5597837
           },
           headers: {
-            'X-Client-Info':
+            "X-Client-Info":
               '{"a":"3000","ch":"1002","v":"5.0.4","e":"157052860619327352833105"}',
-            'X-Host': 'mall.film-ticket.cinema.info'
+            "X-Host": "mall.film-ticket.cinema.info"
           }
         })
         .then(response => {
-          this.cinemaDetail = response.data.data.cinema
-          // let _this = this
-          // console.log( this.cinemaDetail);
+          this.cinemaDetail = response.data.data.cinema;
+          let _this = this;
           /* eslint-disable */
           new Swiper(".swiper-container", {
             slidesPerView: 3,
-            // freeMode: true,
-            // loop: false,
-            // spaceBetween:30,
             slideToClickedSlide: true,
-            centeredSlides: true
-            // observeParents: true, // 用于父元素
-            // on: {
-            //   slideChange: function() {
-            //     _this.showDateIndex = this.activeIndex;
-            //     _this.fn();
-            //     _this.getScheduleList();
-            //     //  console.log(_this.filmsList[_this.showDateIndex].showDate[0])
-            //   }
-            // }
+            centeredSlides: true,
+            on: {
+              slideChange: function() {
+                // console.log(this.activeIndex);
+                _this.showDateIndex = this.activeIndex; //改变影片展示的下标
+                _this.showDate = _this.filmsList[_this.showDateIndex].showDate; // 动态生成影片时间展示
+                // console.log(_this.showDateIndex);
+                _this.dateId = _this.filmsList[_this.showDateIndex].showDate[0];
+                _this.filmId = _this.filmsList[_this.showDateIndex].filmId;
+                _this.getScheduleList();
+              }
+            }
           });
         });
     },
+    /****获取影片播放时间表 */
     getScheduleList() {
-      // console.log(this.dateId);
-      // console.log(this.filmId);
       axios
         .get("https://m.maizuo.com/gateway", {
           params: {
@@ -238,9 +215,7 @@ export default {
         })
         .then(response => {
           this.scheduleList = response.data.data.schedules;
-          // console.log(this.scheduleList);
         });
-      // this.dateId=this.filmsList[0].showDate[0]
       this.dateId = this.filmsList[this.showDateIndex].showDate[0];
     }
   },
@@ -248,10 +223,6 @@ export default {
     this.getCinemaInfo();
     this.getFilmListByCinema();
   }
-  // mounted() {
-  //   // this.getShowDateIndex()
-  //   console.log(this.dateId);
-  // }
 };
 </script>
 <style lang="scss">
@@ -345,8 +316,9 @@ export default {
         width: 80%;
       }
     }
-    .swiper-slide-active,.swiper-slide-duplicate-active{
-        transform: scale(1);
+    .swiper-slide-active,
+    .swiper-slide-duplicate-active {
+      transform: scale(1);
     }
   }
   // }
@@ -398,12 +370,13 @@ export default {
   .dataUl {
     margin-top: 5px;
     display: flex;
+    position: relative;
     li {
       margin-right: 5px;
       margin-left: 20px;
       position: relative;
       .cn-date {
-        position: relative;
+        
         top: 1px;
         font-weight: 700;
         font-size: 14px;
@@ -413,19 +386,19 @@ export default {
         margin-bottom: 5px;
         margin-top: 2px;
       }
-      .active-line {
+    }
+     #active-line {
         position: absolute;
         height: 2px;
         width: 15px;
         top: 35px;
-        left: 7px;
+        left: 30px;
         display: block;
         width: 15px;
         height: 2px;
         margin: auto;
         background: #ff2e62;
       }
-    }
   }
   .schedules-list {
     margin-top: 10px;
