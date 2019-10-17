@@ -2,38 +2,63 @@
   <div class="film-list">
     <!-- 正在热映 -->
     <ul>
-      <li>
-        <div class="left">
-          <img src="https://static.maizuo.com/pc/v5/usr/movie/ab0ee357e3fb0718059df8d8717a1bf7.jpg?x-oss-process=image/quality,Q_70" alt="">
+      <router-link tag="li" :to="`/film/${film.filmId}`" v-for="film in filmList" :key="film.filmId">
+            <div class="left">
+          <img :src="film.poster" alt />
         </div>
         <div class="center">
-          <div class="name">中国机长</div>
+          <div class="name">{{ film.name }}</div>
           <div class="grade">
             淘票票评分
-            <span>7</span>
+            <span>{{ film.grade }}</span>
           </div>
-          <div class="actors">主演：张三、李四、王麻子、赵倩、随礼、周五、郑旺</div>
-          <div class="detail">中国大陆 | 111分钟</div>
+          <div class="actors">主演：{{ formatActors(film.actors) }}</div>
+          <div class="detail">{{ film.nation }} | {{ film.runtime }}分钟</div>
         </div>
         <div class="right">
           <div>
             <div class="buy">购票</div>
           </div>
         </div>
-      </li>
+      </router-link>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
-  name: 'NowPlaying'
+  name: 'NowPlaying',
+
+  computed: {
+    ...mapState('film', ['filmList'])
+  },
+
+  methods: {
+    ...mapActions('film', ['getFilmList']),
+
+    formatActors (actors) {
+      let tmp = actors.map(item => {
+        return item.name
+      })
+      return tmp.join('、')
+    }
+  },
+
+  created () {
+    this.getFilmList({
+      type: 1
+    })
+  }
 }
 </script>
 
 <style lang="scss">
 @import '../assets/styles/common/mixins.scss';
   .film-list {
+    overflow: auto;
+
     ul{
       margin-left: 15px;
     }
@@ -74,10 +99,12 @@ export default {
           border: none;
           background: #ff2e62;
           border-radius: 13px;
+          text-align: center;
           color: #fff;
           line-height: 26px;
           text-align: center;
           align-content: center;
+          font-size: 12px;
         }
       }
     }

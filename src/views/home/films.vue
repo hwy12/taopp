@@ -7,7 +7,7 @@
     <div class="head">
       <!-- city 城市 -->
 
-      <router-link to="/city" class="city i-logo">
+      <router-link tag="p" to="city" class="city i-logo">
         <div>北京</div>
         <i class="iconfont icon-xiajiantou"></i>
       </router-link>
@@ -70,6 +70,7 @@ export default {
 <style lang="scss">
 @import '../../assets/styles/common/mixins.scss';
 .page-home {
+
   .head {
     height: 50px;
     display: flex;
@@ -88,10 +89,12 @@ export default {
 
       div {
         display: inline-block;
+        color: #000;
       }
 
       i{
         margin-left: 5px;
+        color: #000;
       }
     }
   }
@@ -105,7 +108,7 @@ export default {
       li {
         height: 50px;
         line-height: 50px;
-        padding: 0 15px;
+        padding: 0 10px;
         color: #777;
 
         &.active {
