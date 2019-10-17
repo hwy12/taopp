@@ -24,7 +24,6 @@
     </ul>
   </div>
 </template>
-<<<<<<< HEAD
 
 <script>
 import { mapState, mapActions } from 'vuex'
@@ -103,5 +102,3 @@ export default {
     }
   }
 </style>
-=======
->>>>>>> 9dbdd0b30f67bdb8f0db7d86422fd9d3a31785c9

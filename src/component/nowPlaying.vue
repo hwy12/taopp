@@ -99,10 +99,7 @@ export default {
           border: none;
           background: #ff2e62;
           border-radius: 13px;
-<<<<<<< HEAD
           text-align: center;
-=======
->>>>>>> 9dbdd0b30f67bdb8f0db7d86422fd9d3a31785c9
           color: #fff;
           line-height: 26px;
           text-align: center;
