@@ -43,7 +43,10 @@ const router = new Router({
         },
         {
           path: 'center',
-          component: Center
+          component: Center,
+          meta: {
+            needLogin: true
+          }
         },
         {
           path: '',
@@ -73,7 +76,10 @@ const router = new Router({
     },
     {
       path: '/money',
-      component: Money
+      component: Money,
+      meta: {
+        needLogin: true
+      }
     },
     {
       path: '/movie',
@@ -84,5 +90,21 @@ const router = new Router({
       component: Seat
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  let userInfo = window.localStorage.getItem('userInfo')
+
+  if (to.meta.needLogin && !userInfo) {
+    // 需要去登录
+    next({
+      path: 'login',
+      query: {
+        redirect: to.fullPath
+      }
+    })
+  } else {
+    next()
+  }
 })
 export default router
