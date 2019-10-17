@@ -92,6 +92,7 @@ const router = new Router({
   ]
 })
 
+// 全局守卫,登录拦截
 router.beforeEach((to, from, next) => {
   let userInfo = window.localStorage.getItem('userInfo')
 
