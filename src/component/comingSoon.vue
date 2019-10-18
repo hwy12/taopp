@@ -90,7 +90,8 @@ export default {
           width: 50px;
           height: 26px;
           border: none;
-          background: #1d8622;
+          // background: #1d8622;
+          background-image: linear-gradient(45deg,#ff47a8,#ff2e62);
           border-radius: 13px;
           text-align: center;
           color: #fff;

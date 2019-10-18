@@ -2,8 +2,13 @@
   <div class="film-list">
     <!-- 正在热映 -->
     <ul>
-      <router-link tag="li" :to="`/film/${film.filmId}`" v-for="film in filmList" :key="film.filmId">
-            <div class="left">
+      <router-link
+        tag="li"
+        :to="`/film/${film.filmId}`"
+        v-for="film in filmList"
+        :key="film.filmId"
+      >
+        <div class="left">
           <img :src="film.poster" alt />
         </div>
         <div class="center">
@@ -55,58 +60,59 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/styles/common/mixins.scss';
-  .film-list {
-    overflow: auto;
+@import "../assets/styles/common/mixins.scss";
+.film-list {
+  overflow: auto;
 
-    ul{
-      margin-left: 15px;
+  ul {
+    margin-left: 15px;
+  }
+
+  li {
+    @include border-bottom;
+    display: flex;
+    height: 94px;
+    padding: 15px 15px 15px 0;
+    overflow: hidden;
+    .left {
+      width: 66px;
+      flex-shrink: 0; //不被压迫
+      img {
+        width: 100%;
+      }
     }
-
-     li {
-      @include border-bottom;
-      display: flex;
-      height: 94px;
-      padding: 15px 15px 15px 0;
+    .center {
+      flex: 1;
+      padding: 0 10px;
+      line-height: 1.5;
       overflow: hidden;
-      .left {
-        width: 66px;
-        flex-shrink: 0; //不被压迫
-        img {
-          width: 100%;
-        }
-      }
-      .center {
-        flex: 1;
-        padding: 0 10px;
-        line-height: 1.5;
+      > div {
         overflow: hidden;
-        > div {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
-      .right {
-        width: 50px;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
+    }
+    .right {
+      width: 50px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
 
-        .buy {
-          width: 50px;
-          height: 26px;
-          border: none;
-          background: #ff2e62;
-          border-radius: 13px;
-          text-align: center;
-          color: #fff;
-          line-height: 26px;
-          text-align: center;
-          align-content: center;
-          font-size: 12px;
-        }
+      .buy {
+        width: 50px;
+        height: 26px;
+        border: none;
+        // background: #ff2e62;
+        background-image: linear-gradient(45deg, #ff47a8, #ff2e62);
+        border-radius: 13px;
+        text-align: center;
+        color: #fff;
+        line-height: 26px;
+        text-align: center;
+        align-content: center;
+        font-size: 12px;
       }
     }
   }
+}
 </style>
