@@ -15,11 +15,11 @@
           <div class="actors">主演：{{ formatActors(film.actors) }}</div>
           <div class="detail">{{ film.nation }} | {{ film.runtime }}分钟</div>
         </div>
-        <div class="right">
+        <router-link class="right"  :to="`/movie/${film.filmId}`" >
           <div>
             <div class="buy">购票</div>
           </div>
-        </div>
+        </router-link>
       </router-link>
     </ul>
   </div>

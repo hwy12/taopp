@@ -82,7 +82,7 @@ const router = new Router({
       }
     },
     {
-      path: '/movie',
+      path: '/movie/:id',
       component: Movie
     },
     {

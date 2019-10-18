@@ -5,8 +5,8 @@ import store from './store/index'
 import Swiper from 'swiper'
 import moment from 'moment'
 
+import { DropdownMenu, DropdownItem } from 'vant'
 Vue.config.productionTip = false
-
 new Vue({
   router,
   store,
@@ -14,3 +14,5 @@ new Vue({
   moment,
   render: h => h(App)
 }).$mount('#app')
+
+Vue.use(DropdownMenu).use(DropdownItem)
