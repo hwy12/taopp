@@ -21,7 +21,7 @@
 
       <div class="film-category">{{ filmdata.category }}</div>
 
-      <div class="film-premiere-time">{{ filmdata.premiereAt }}</div>
+      <div class="film-premiere-time">{{formatTime( filmdata.premiereAt )}} 上映</div>
 
       <div class="film-nation-runtime">{{ filmdata.nation }} | {{ filmdata.runtime }}</div>
 
@@ -91,6 +91,7 @@
 
 <script>
 import axios from 'axios'
+import moment from 'moment'
 export default {
   name: 'filmDetail',
 
@@ -104,13 +105,16 @@ export default {
   methods: {
     clickToggle () {
       this.isShow = !this.isShow
+    },
+    formatTime (date) {
+      let newDate = date * 1000
+      return moment(newDate).format('YYYY-MM-HH')
     }
   },
-
   created () {
     // console.log(this.$route.params.id);
     // var _this = this;
-
+    this.formatTime()
     axios
       .get('https://m.maizuo.com/gateway', {
         params: {

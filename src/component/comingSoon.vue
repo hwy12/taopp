@@ -15,11 +15,11 @@
           <div class="actors">导演：{{ film.director }}</div>
           <div class="detail">{{ film.nation }} | {{ film.runtime }}分钟</div>
         </div>
-        <div class="right">
+        <router-link class="right"  to="/movie/111">
           <div>
             <div class="buy">预售</div>
           </div>
-        </div>
+        </router-link>
       </router-link>
     </ul>
   </div>

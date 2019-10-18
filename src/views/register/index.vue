@@ -9,7 +9,7 @@
 
     <form class="register-form">
       <div class="form-tel">
-        <input type="tel" v-model="phone" @blur="checkphone()" placeholder="请输入手机号码" />
+        <input type="tel" v-model="phone" @blur="checkphone()"  placeholder="请输入手机号码" />
         <p class="errorP">{{telError}}</p>
       </div>
 
@@ -56,10 +56,12 @@ export default {
   },
 
   methods: {
+
     checkphone () {
       let phone = this.phone
       if (phone.length === 0) {
         this.telError = '手机号码不能为空'
+        // this.telError = '请输入手机号码'
       } else if (!/^1[3456789]\d{9}$/.test(phone)) {
         this.telError = '手机号码有误,请重新输入'
       } else {

@@ -63,7 +63,7 @@ const router = new Router({
       component: Film
     },
     {
-      path: '/cinema',
+      path: '/:id/cinema',
       component: Cinema
     },
     {
@@ -82,7 +82,7 @@ const router = new Router({
       }
     },
     {
-      path: '/movie',
+      path: '/movie/:id',
       component: Movie
     },
     {
